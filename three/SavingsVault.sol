@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-interface IERC20 {
+interface ERC20 {
     function transferFrom(address from, address to, uint amount) external returns (bool);
     function transfer(address to, uint amount) external returns (bool);
     function balanceOf(address owner) external view returns (uint);
@@ -52,7 +52,7 @@ contract SavingsVault {
         require(amount > 0, "Amount must be > 0");
 
         
-        bool success = IERC20(token).transferFrom(msg.sender, address(this), amount);
+        bool success = ERC20(token).transferFrom(msg.sender, address(this), amount);
         require(success, "Transfer failed");
 
         tokenSavings[msg.sender][token] += amount;
@@ -65,7 +65,7 @@ contract SavingsVault {
 
         tokenSavings[msg.sender][token] -= amount;
 
-        bool success = IERC20(token).transfer(msg.sender, amount);
+        bool success = ERC20(token).transfer(msg.sender, amount);
         require(success, "Transfer failed");
 
         emit TokenWithdrawn(msg.sender, token, amount);
