@@ -46,8 +46,6 @@ contract SavingsVault {
         return etherSavings[user];
     }
 
-
-
     function depositToken(address token, uint amount) external {
         require(amount > 0, "Amount must be > 0");
 
